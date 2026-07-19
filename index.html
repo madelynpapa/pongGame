@@ -216,7 +216,7 @@
             width: paddleWidth,
             height: paddleHeight,
             dy: 0,
-            speed: 3,
+            speed: 4,
             reactionDelay: 0,
             reactionCounter: 0
         };
@@ -299,11 +299,11 @@
         }
 
         function updateAIPaddle() {
-            // Add reaction delay to make AI miss sometimes
+            // Add subtle reaction delay to make AI beatable but competitive
             ai.reactionCounter++;
             if (ai.reactionCounter >= ai.reactionDelay) {
                 ai.reactionCounter = 0;
-                ai.reactionDelay = Math.random() * 15 + 5; // Random delay between 5-20 frames
+                ai.reactionDelay = Math.random() * 8 + 2; // Random delay between 2-10 frames
             }
 
             const aiCenter = ai.y + ai.height / 2;
@@ -311,9 +311,9 @@
 
             // Only move if reaction counter is ready
             if (ai.reactionCounter === 0) {
-                if (aiCenter < ballCenter - 50) {
+                if (aiCenter < ballCenter - 40) {
                     ai.y = Math.min(canvas.height - ai.height, ai.y + ai.speed);
-                } else if (aiCenter > ballCenter + 50) {
+                } else if (aiCenter > ballCenter + 40) {
                     ai.y = Math.max(0, ai.y - ai.speed);
                 }
             }
